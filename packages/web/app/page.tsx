@@ -53,7 +53,7 @@ export default function EnvGuardLanding() {
               GitHub
             </Link>
             <Link
-              href={"https://www.npmjs.com/package/envgaurd"}
+              href={"https://www.npmjs.com/package/@flyinghawk/envguard"}
               className={cn(
                 buttonVariants({ variant: "ghost", size: "sm" }),
                 "text-lg px-8",
@@ -113,7 +113,7 @@ export default function EnvGuardLanding() {
                 Get Started
               </Link>
               <Link
-                href={"https://www.npmjs.com/package/envgaurd"}
+                href={"https://www.npmjs.com/package/@flyinghawk/envguard"}
                 className={cn(
                   buttonVariants({ variant: "outline", size: "lg" }),
                   "text-lg px-8",
@@ -315,7 +315,7 @@ export default function EnvGuardLanding() {
               GitHub
             </Link>
             <Link
-              href="https://www.npmjs.com/package/envgaurd"
+              href="https://www.npmjs.com/package/@flyinghawk/envguard"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-white transition-colors"

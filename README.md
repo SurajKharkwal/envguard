@@ -1,7 +1,7 @@
 # env-guard
 
 ```
-bun add envgaurd
+bun add  @flyinghawk/envguard
 ```
 
 A simple, type-safe environment variable manager for Node.js and Bun projects.  

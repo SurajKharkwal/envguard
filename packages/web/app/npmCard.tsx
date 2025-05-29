@@ -34,7 +34,9 @@ export default function NpmCard() {
             )}
           </Button>
         </div>
-        <code className="text-green-400 text-lg">npm install envguard zod</code>
+        <code className="text-green-400 text-lg">
+          npm install @flyinghawk/envguard zod
+        </code>
       </CardContent>
     </Card>
   );

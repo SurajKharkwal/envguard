@@ -12,9 +12,9 @@ A simple and type-safe way to manage your environment variables in Node.js and B
 ## 📦 Installation
 
 ```bash
-bun add envguard
+bun add @flyinghawk/envguard
 # or
-npm install envguard
+npm install @flyinghawk/envguard
 ```
 
 🛠️ Usage
@@ -23,7 +23,7 @@ npm install envguard
 
 ```
 // env.ts
-import { defineEnv } from 'envguard'
+import { defineEnv } from '@flyinghawk/envguard'
 
 export const env = defineEnv({
   PORT: {
