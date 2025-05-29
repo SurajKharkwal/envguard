@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { Shield, CheckCircle, Code, Zap, Github, Download } from "lucide-react";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import {
   Card,
   CardContent,
