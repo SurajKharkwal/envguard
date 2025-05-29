@@ -1,75 +1,58 @@
-import { resolve } from "path";
-import { readFileSync, existsSync } from "fs";
-import { ZodSchema, infer as zInfer } from "zod";
+import fs from "fs";
+import path from "path";
+import { ZodSchema } from "zod";
 
-/** Parse .env file contents into key/value pairs. */
-export function parseEnvFile(file: string): Record<string, string> {
-  const env: Record<string, string> = {};
-  let currentKey: string | null = null;
+// Line matching for dotenv parsing
+const LINE =
+  /(?:^|^)\s*(?:export\s+)?([\w.-]+)(?:\s*=\s*?|:\s+?)(\s*'(?:\\'|[^'])*'|\s*"(?:\\"|[^"])*"|\s*`(?:\\`|[^`])*`|[^#\r\n]+)?\s*(?:#.*)?(?:$|$)/gm;
 
-  for (const rawLine of file.split(/\r?\n/)) {
-    const line = rawLine.trim();
-    if (!line || line.startsWith("#")) continue;
+function parseEnvFile(src: string): Record<string, string> {
+  const obj: Record<string, string> = {};
+  const lines = src.replace(/\r\n?/gm, "\n");
 
-    if (currentKey && env[currentKey]?.endsWith("\\") && !line.includes("=")) {
-      env[currentKey] = env[currentKey].slice(0, -1) + "\n" + line;
-      continue;
+  let match: RegExpExecArray | null;
+  while ((match = LINE.exec(lines)) !== null) {
+    const key = match[1];
+    let value = match[2] || "";
+
+    value = value.trim();
+    const maybeQuote = value[0];
+    value = value.replace(/^(['"`])([\s\S]*)\1$/gm, "$2");
+
+    if (maybeQuote === '"') {
+      value = value.replace(/\\n/g, "\n").replace(/\\r/g, "\r");
     }
 
-    const eq = line.indexOf("=");
-    if (eq === -1) continue;
-
-    currentKey = line.slice(0, eq).trim();
-    let val = line.slice(eq + 1).trim();
-
-    if (
-      (val.startsWith('"') && val.endsWith('"')) ||
-      (val.startsWith("'") && val.endsWith("'"))
-    ) {
-      val = val.slice(1, -1);
-    }
-
-    env[currentKey] = val;
+    obj[key] = value;
   }
 
-  return env;
+  return obj;
 }
 
-export interface LoadEnvOptions<T extends ZodSchema<any>> {
-  paths?: string[];
-  schema: T;
-  dryRun?: boolean;
-}
+export function loadDotEnv<T extends ZodSchema<any>>(
+  schema: T,
+  envPath = ".env",
+): ReturnType<T["parse"]> {
+  const resolved = path.resolve(process.cwd(), envPath);
+  if (!fs.existsSync(resolved)) return schema.parse({});
 
-export function loadEnv<T extends ZodSchema<any>>(
-  opts: LoadEnvOptions<T>,
-): zInfer<T> {
-  const paths = opts.paths?.length ? opts.paths : [".env"];
-  const collected: Record<string, string> = {};
+  const content = fs.readFileSync(resolved, "utf-8");
+  const parsed = parseEnvFile(content);
 
-  for (const path of paths) {
-    const abs = resolve(process.cwd(), path);
-    if (!existsSync(abs)) continue;
-
-    const parsed = parseEnvFile(readFileSync(abs, "utf8"));
-    Object.assign(collected, parsed);
-  }
-
-  const result = opts.schema.safeParse(collected);
-
-  if (!result.success) {
+  const validated = schema.safeParse(parsed);
+  if (!validated.success) {
     console.error("❌ Invalid environment variables:");
-    for (const issue of result.error.errors) {
-      console.error(`• ${issue.path.join(".")}: ${issue.message}`);
-    }
-    throw result.error;
+    console.error(validated.error.message);
+    throw new Error("Environment validation failed");
   }
 
-  if (!opts.dryRun) {
-    for (const [k, v] of Object.entries(result.data)) {
-      process.env[k] ??= String(v);
+  // Assign to process.env
+  const data = validated.data;
+  for (const [key, value] of Object.entries(data)) {
+    if (typeof value === "string" && process.env[key] === undefined) {
+      process.env[key] = value;
     }
   }
 
-  return result.data;
+  return data;
 }
