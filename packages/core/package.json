@@ -1,0 +1,48 @@
+{
+  "name": "envgaurd",
+  "version": "0.0.1",
+  "description": "A robust env loader with Zod validation for Node.js and Bun.",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "keywords": [
+    "env",
+    "environment",
+    "dotenv",
+    "zod",
+    "validation",
+    "typescript",
+    "loader"
+  ],
+  "author": "Suraj Kharkwal kharkwalsuraj13gmail.com",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SurajKharkwal/zenv.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SurajKharkwal/zenv/issues"
+  },
+  "homepage": "https://github.com/SurajKharkwal/zenv#readme",
+  "scripts": {
+    "build": "rm -rf dist && tsup src/index.ts --format cjs,esm --dts --clean",
+    "test": "echo \"No tests yet\""
+  },
+  "dependencies": {
+    "bun-types": "latest",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.0"
+  }
+}
