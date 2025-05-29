@@ -1,17 +1,24 @@
-# zenv
+# env-guard
 
-To install dependencies:
-
-```bash
-bun install
+```
+bun add envgaurd
 ```
 
-To run:
+A simple, type-safe environment variable manager for Node.js and Bun projects.  
+It helps you load `.env` files, validate required variables, provide default values, and generate TypeScript types.  
+Built as a monorepo with CLI and core logic in separate packages.
 
-```bash
-bun run index.ts
-```
+## ✨ Features
 
-This project was created using `bun init` in bun v1.2.10. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
-# zenv
-# envgaurd
+- 📦 Parse `.env` files
+- ✅ Schema-based validation
+- 🔐 Required keys and default values
+- 🧠 TypeScript type generation
+- 🛠️ Easy-to-use CLI
+
+📦 Usage
+Check out the individual package READMEs for usage:
+
+main: Core features and how to use the library in your code
+
+cli: CLI usage and commands

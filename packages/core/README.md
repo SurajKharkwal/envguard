@@ -1,15 +1,54 @@
-# core
+# envguard
 
-To install dependencies:
+A simple and type-safe way to manage your environment variables in Node.js and Bun projects.
+
+- ✅ Schema validation
+- 🔐 Required variables and default values
+- 🧠 Generates TypeScript types
+- 🛠️ Built-in CLI for workflows
+
+---
+
+## 📦 Installation
 
 ```bash
-bun install
+bun add envguard
+# or
+npm install envguard
 ```
 
-To run:
+🛠️ Usage
 
-```bash
-bun run src/index.ts
+1. Create a schema file
+
+```
+// env.ts
+import { defineEnv } from 'envguard'
+
+export const env = defineEnv({
+  PORT: {
+    type: 'number',
+    default: 3000,
+  },
+  DB_URL: {
+    type: 'string',
+    required: true,
+  },
+})
 ```
 
-This project was created using `bun init` in bun v1.2.10. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+2. Load and use environment variables
+
+```
+console.log(env.PORT)    // 3000 (or from .env)
+console.log(env.DB_URL)  // must be present
+```
+
+## 💻 Contribute
+
+PRs and feedback welcome!
+This package is part of a monorepo – see the GitHub repo for full source and structure.
+
+---
+
+Let me know if you want me to tailor this to the CLI package specifically or link it with examples in Bun, Next.js, or other frameworks.
