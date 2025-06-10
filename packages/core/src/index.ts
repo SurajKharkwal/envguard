@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { ZodSchema } from "zod";
+import { z, ZodType } from "zod/v4";
 
 // Line matching for dotenv parsing
 const LINE =
@@ -9,7 +9,6 @@ const LINE =
 function parseEnvFile(src: string): Record<string, string> {
   const obj: Record<string, string> = {};
   const lines = src.replace(/\r\n?/gm, "\n");
-
   let match: RegExpExecArray | null;
   while ((match = LINE.exec(lines)) !== null) {
     const key = match[1];
@@ -25,14 +24,13 @@ function parseEnvFile(src: string): Record<string, string> {
 
     obj[key] = value;
   }
-
   return obj;
 }
 
-export function loadDotEnv<T extends ZodSchema<any>>(
+export function loadDotEnv<T extends ZodType<any, any>>(
   schema: T,
   envPath = ".env",
-): ReturnType<T["parse"]> {
+): z.infer<T> {
   const resolved = path.resolve(process.cwd(), envPath);
   if (!fs.existsSync(resolved)) return schema.parse({});
 

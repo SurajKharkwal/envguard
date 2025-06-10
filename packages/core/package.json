@@ -1,7 +1,7 @@
 {
   "name": "@flyinghawk/envguard",
-  "version": "0.0.1",
-  "description": "A robust env loader with Zod validation for Node.js and Bun.",
+  "version": "0.0.2",
+  "description": "A env loader with Zod validation",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",

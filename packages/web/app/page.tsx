@@ -52,16 +52,6 @@ export default function EnvGuardLanding() {
               <Github className="h-4 w-4 mr-2" />
               GitHub
             </Link>
-            <Link
-              href={"https://www.npmjs.com/package/@flyinghawk/envguard"}
-              className={cn(
-                buttonVariants({ variant: "ghost", size: "sm" }),
-                "text-lg px-8",
-              )}
-            >
-              <Download className="h-4 w-4 mr-2" />
-              Install
-            </Link>
           </div>
         </div>
       </motion.header>
@@ -256,7 +246,7 @@ export default function EnvGuardLanding() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Contribution Section */}
       <section className="py-20 px-4 bg-gradient-to-r from-blue-100 to-blue-200">
         <div className="container mx-auto text-center">
           <motion.div
@@ -266,35 +256,33 @@ export default function EnvGuardLanding() {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Ready to Secure Your Environment?
+              Want to Help Improve EnvGuard?
             </h2>
             <p className="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
-              Join developers who trust EnvGuard to validate their environment
-              variables
+              We're looking for contributors to help maintain and refactor the
+              project. If you’re interested in open-source, we’d love your help!
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href={"https://github.com/SurajKharkwal"}
+                href={"https://github.com/SurajKharkwal/envguard"}
                 className={buttonVariants({ variant: "default", size: "lg" })}
               >
-                <Download className="h-5 w-5 mr-2" />
-                Install EnvGuard
+                <Github className="h-5 w-5 mr-2" />
+                Contribute on GitHub
               </Link>
               <Link
-                href={"https://github.com/SurajKharkwal"}
+                href={"https://github.com/SurajKharkwal/envguard/issues"}
                 className={cn(
-                  buttonVariants({ variant: "default", size: "lg" }),
-                  "text-lg px-8 border-gray-800 text-gray-100 hover:bg-gray-100",
+                  buttonVariants({ variant: "outline", size: "lg" }),
+                  "text-lg px-8 text-gray-800 hover:bg-gray-100",
                 )}
               >
-                <Github className="h-5 w-5 mr-2" />
-                View on GitHub
+                Open Issues
               </Link>
             </div>
           </motion.div>
         </div>
       </section>
-
       {/* Footer */}
       <footer className="py-12 px-4 bg-gray-800 text-white">
         <div className="container mx-auto text-center">

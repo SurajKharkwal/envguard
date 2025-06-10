@@ -10,8 +10,7 @@
     "refresh": "rm -rf node_modules && bun install"
   },
   "dependencies": {
-    "envgaurd": "^0.0.4",
-    "envgaurd-cli": "^0.0.2",
+    "@flyinghawk/envguard": "^0.0.2",
     "next": "15.3.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

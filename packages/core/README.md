@@ -2,39 +2,35 @@
 
 A simple and type-safe way to manage your environment variables in Node.js and Bun projects.
 
-- ✅ Schema validation
-- 🔐 Required variables and default values
-- 🧠 Generates TypeScript types
-- 🛠️ Built-in CLI for workflows
+- Schema validation
+- Required variables and default values
 
 ---
 
 ## 📦 Installation
 
 ```bash
-bun add @flyinghawk/envguard
+bun add @flyinghawk/envguard zod
 # or
-npm install @flyinghawk/envguard
+npm install @flyinghawk/envguard zod
 ```
 
 🛠️ Usage
 
 1. Create a schema file
 
-```
+```ts
 // env.ts
-import { defineEnv } from '@flyinghawk/envguard'
+import { loadDotEnv } from "@flyinghawk/envguard";
 
-export const env = defineEnv({
-  PORT: {
-    type: 'number',
-    default: 3000,
-  },
-  DB_URL: {
-    type: 'string',
-    required: true,
-  },
-})
+const envSchema = z.object({
+  API_KEY: z.string(),
+  port: z.coerce.number(), // will convert "4000" to 4000
+});
+
+// Pass the schema and optionally the path to loadEnv
+const env = loadDotEnv(envSchema); // or loadDotEnv(schema, "../../.env")
+// returns the env else throws the error
 ```
 
 2. Load and use environment variables
@@ -46,9 +42,4 @@ console.log(env.DB_URL)  // must be present
 
 ## 💻 Contribute
 
-PRs and feedback welcome!
-This package is part of a monorepo – see the GitHub repo for full source and structure.
-
----
-
-Let me know if you want me to tailor this to the CLI package specifically or link it with examples in Bun, Next.js, or other frameworks.
+Looking for help to improve and maintain this project. PRs welcome!

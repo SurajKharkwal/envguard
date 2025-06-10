@@ -14,5 +14,13 @@
   },
   "dependencies": {
     "zod": "^3.25.34"
+  },
+  "scripts": {
+    "dev": "bun run --cwd packages/web dev",
+    "test": "bun run --cwd example/nextjs dev",
+    "build:core": "bun run --cwd packages/core build",
+    "build:web": "bun run --cwd packages/web build",
+    "build": "bun run build:core && bun run build:web",
+    "clean": "rm -rf node_modules packages/*/node_modules build packages/*/build dist packages/*/dist"
   }
 }
