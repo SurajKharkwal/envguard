@@ -11,4 +11,4 @@ Built as a monorepo with CLI and core logic in separate packages.
 ## ✨ Features
 
 -  Parse `.env` files
-- ✅ Schema-based validation
+-  Schema-based validation
