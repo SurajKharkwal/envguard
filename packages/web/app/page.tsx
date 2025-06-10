@@ -259,8 +259,9 @@ export default function EnvGuardLanding() {
               Want to Help Improve EnvGuard?
             </h2>
             <p className="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
-              We're looking for contributors to help maintain and refactor the
-              project. If you’re interested in open-source, we’d love your help!
+              We&apos;re looking for contributors to help maintain and refactor
+              the project. If you’re interested in open-source, we’d love your
+              help!
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
